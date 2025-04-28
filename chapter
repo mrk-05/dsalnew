@@ -1,0 +1,98 @@
+#include<iostream>
+using namespace std;
+int i,j,k;
+struct node
+{
+	string label;
+	int count;
+	struct node* child[50];
+};
+class book
+{
+	node* root;
+	public:
+	void create();
+	void display();
+	book()
+	{
+		root = NULL;
+	}
+};
+void book::create()
+{
+	root = new node;
+	cout<<"enter name of book ";
+	cin>>root->label;
+	cout<<"Enter number of chapter ";
+	cin>>root->count;
+	for(i=0;i<root->count;i++)
+	{
+		root->child[i]=new node;
+		cout<<"Enter a chaper name"<<i+1;
+		cin>>root->child[i]->label;
+		cout<<"Enter number of section for chapter no "<<i+1;
+		cin>>root->child[i]->count;
+		for(j=0;j<root->child[i]->count;j++)
+		{
+			root->child[i]->child[j]=new node;
+			cout<<"Enter a section name"<<i+1;
+			cin>>root->child[i]->child[j]->label;
+			cout<<"Enter number of sub-section for section  "<<j+1;
+			cin>>root->child[i]->child[j]->count;
+			for(k=0;k<root->child[i]->child[j]->count;k++)
+			{
+			root->child[i]->child[j]->child[k]=new node;
+			cout<<"Enter a sub section name"<<k+1;
+			cin>>root->child[i]->child[j]->child[k]->label;
+			}
+		}
+	}
+}                                                                            
+void book::display()
+{
+	if(root==NULL)
+		cout<<"tree is empty";
+	else
+	{
+		cout<<"book name is"<<root->label<<"\n";
+		for(i=0;i<root->count;i++)
+		{
+			cout<<i+1<<". "<<root->child[i]->label<<endl;
+			for(j=0;j<root->child[i]->count;j++)
+			{
+				cout<<"\t"<<j+1<<"-->"<<root->child[i]->child[j]->label<<endl;
+				for(k=0;k<root->child[i]->child[j]->count;k++)
+				{
+					cout<<"\t\t"<<k+1<<"-->"<<root->child[i]->child[j]->child[k]->label<<endl;
+				}
+			}
+		}
+	}
+}
+int main()
+{
+	book b;
+	b.create();
+	b.display();
+	return 0;
+}
+
+
+/*enter name of book    
+shopkeeper
+Enter number of chapter     
+2
+Enter a chaper name1    
+quin
+Enter number of section for chapter no 1 
+2
+Enter a section name1    
+sadg
+Enter number of sub-section for section  1
+1
+Enter a sub section name1sad
+Enter a section name1
+sad
+Enter number of sub-section for section  2*/
+
+	
